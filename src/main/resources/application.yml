@@ -17,4 +17,5 @@ management:
           - "*"
 
 logging:
-  level: debug
+  level:
+    root: info

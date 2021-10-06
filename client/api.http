@@ -1,0 +1,32 @@
+# 1. 단일조회
+GET {{host}}/api/members/1
+Content-Type: application/json
+
+###
+
+# 2. 생성
+POST {{host}}/api/members
+Content-Type: application/json
+
+{
+  "email": "seol6@naver.com",
+  "name": "seol6"
+}
+
+###
+
+# 3. 수정
+
+PUT {{host}}/api/members/1
+Content-Type: application/json
+
+{
+  "email": "seol1@naver.com",
+  "name": "seol100"
+}
+
+###
+
+# 4. 페이징
+GET {{host}}/api/members?page=0&size=2
+Content-Type: application/json
