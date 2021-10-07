@@ -2,7 +2,7 @@
 //operation::member-controller-test/member_get[snippets='http-request,path-parameters,http-response,response-fields']
 
 = REST Docs
-Andy Wilkinson;
+seolnavy;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
