@@ -1,4 +1,4 @@
-package seol.study.javaspringrestdocs;
+package seol.study.restdocs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

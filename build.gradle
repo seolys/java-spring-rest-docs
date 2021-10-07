@@ -1,7 +1,7 @@
 plugins {
-    id("org.springframework.boot") version "2.5.2"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    id("org.asciidoctor.jvm.convert") version "3.1.0"
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id("org.asciidoctor.jvm.convert") version "3.1.0" // 1
     id("java")
 }
 
@@ -10,6 +10,8 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+    asciidoctorExtension // 2
+
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -31,9 +33,41 @@ dependencies {
     runtimeOnly("com.h2database:h2:1.4.200")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+
+    asciidoctorExtension("org.springframework.restdocs:spring-restdocs-asciidoctor") // 3
+    testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc") // 4
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')  // 5
+}
+
+
+asciidoctor {
+    configurations 'asciidoctorExtension' // 6
+    inputs.dir snippetsDir // 7
+    baseDirFollowsSourceFile() // 8
+    dependsOn test // 9
 }
 
 test {
-    useJUnitPlatform()
+    outputs.dir snippetsDir  // 10
+    useJUnitPlatform()  // 11
+}
+
+task copyHTMLDocument(type: Copy) {
+    dependsOn asciidoctor  // 12
+    from "${asciidoctor.outputDir}"  // 13
+    into "src/main/resources/static/docs"  // 14
+}
+
+build {
+    dependsOn bootJar // 15
+}
+
+bootJar {
+    dependsOn asciidoctor // 16
+    from("${asciidoctor.outputDir}") { // 17
+        into 'static/docs' // 18
+    }
 }

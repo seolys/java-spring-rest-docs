@@ -1,0 +1,23 @@
+// 템플릿
+//operation::member-controller-test/member_get[snippets='http-request,path-parameters,http-response,response-fields']
+
+= REST Docs
+Andy Wilkinson;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+include::overview.adoc[]
+
+include::Member-API.adoc[]
+
+include::code.adoc[]
+
+
+
+
+
+

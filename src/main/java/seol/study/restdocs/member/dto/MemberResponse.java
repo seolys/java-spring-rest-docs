@@ -1,7 +1,7 @@
-package seol.study.javaspringrestdocs.member.dto;
+package seol.study.restdocs.member.dto;
 
 import lombok.Getter;
-import seol.study.javaspringrestdocs.member.entity.Member;
+import seol.study.restdocs.member.entity.Member;
 
 @Getter
 public class MemberResponse {

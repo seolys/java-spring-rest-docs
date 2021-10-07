@@ -1,5 +1,6 @@
-package seol.study.javaspringrestdocs.member.controller;
+package seol.study.restdocs.member.controller;
 
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import seol.study.javaspringrestdocs.member.dto.MemberModificationRequest;
-import seol.study.javaspringrestdocs.member.dto.MemberResponse;
-import seol.study.javaspringrestdocs.member.dto.MemberSignUpRequest;
-import seol.study.javaspringrestdocs.member.entity.Member;
-import seol.study.javaspringrestdocs.member.repository.MemberRepository;
+import seol.study.restdocs.member.dto.MemberModificationRequest;
+import seol.study.restdocs.member.dto.MemberResponse;
+import seol.study.restdocs.member.dto.MemberSignUpRequest;
+import seol.study.restdocs.member.entity.Member;
+import seol.study.restdocs.member.repository.MemberRepository;
 
 @RestController
 @RequestMapping("/api/members")
 @RequiredArgsConstructor
-public class MemberController {
+public class MemberApi {
 
 	private final MemberRepository memberRepository;
 
@@ -33,12 +34,12 @@ public class MemberController {
 	}
 
 	@PostMapping
-	public void createMember(@RequestBody MemberSignUpRequest dto) {
+	public void createMember(@RequestBody @Valid MemberSignUpRequest dto) {
 		memberRepository.save(dto.toEntity());
 	}
 
 	@PutMapping("/{id}")
-	public void modify(@PathVariable Long id, @RequestBody MemberModificationRequest dto) {
+	public void update(@PathVariable Long id, @RequestBody @Valid MemberModificationRequest dto) {
 		Member member = memberRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Not found"));
 		member.modify(dto.getName());
 		memberRepository.save(member);

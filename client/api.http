@@ -21,7 +21,6 @@ PUT {{host}}/api/members/1
 Content-Type: application/json
 
 {
-  "email": "seol1@naver.com",
   "name": "seol100"
 }
 
